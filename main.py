@@ -5,10 +5,94 @@ import neurokit2 as nk
 from scipy.signal import firwin, butter, filtfilt, iirnotch, freqz , lfilter
 from scipy import signal
 
+import streamlit as st
+
+# =========================
+# Page Config
+# =========================
+st.set_page_config(
+    page_title="ECG Synthesizer & Noise Filtering",
+    layout="centered"
+)
+
+# =========================
+# Retro CSS (Adjusted)
+# =========================
+st.markdown(
+    """
+    <style>
+    /* Page background */
+    .stApp {
+        background-color: #ECE9DF;
+        
+        font-family: "Times New Roman", serif;
+    }
+
+    /* Push main container DOWN to avoid top bar overlap */
+    .block-container {
+        margin-top: 100px;
+        border: 4px double black;
+        padding: 30px;
+        background-color: #FFFFFF;
+        max-width: 900px;
+    }
+
+    /* Title styling */
+    h1 {
+        text-align: center;
+        font-size: 36px;
+        text-transform: uppercase;
+        border-bottom: 2px solid black;
+        padding-bottom: 10px;
+    }
+
+    /* Subheader */
+    h3 {
+        text-align: center;
+        font-size: 18px;
+        font-weight: normal;
+    }
+
+    /* Text blocks */
+    p, div {
+        font-size: 16px;
+        line-height: 1.6;
+    }
+
+    /* Footer */
+    .retro-footer {
+        text-align: center;
+        font-size: 12px;
+        margin-top: 40px;
+        border-top: 1px solid black;
+        padding-top: 10px;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
+# =========================
+# Content (UNCHANGED)
+# =========================
+st.title("ECG SYNTHESIZER & NOISE REMOVAL USING FIR AND IIR DIGITAL FILTERS")
+
+st.subheader(
+    "EE-419K-L | Digital Signal Processing Lab | Instructor: Engr. Zainab Shahid")
+
+st.text(
+    "This web app allows users to explore ECG signal generation, noise modeling, and the application of FIR and IIR digital filters for noise removal.")
+
+st.write(
+    "Scroll down to interact with the various sections of the project. All code is implemented in Python using Streamlit for the web interface. Signal processing is performed using NumPy, SciPy, and NeuroKit2 libraries.")
+
+
+# =========================
+# Retro Footer
+# =========================
+
+
 # ============================================================
-st.set_page_config(page_title="ECG Noise Removal Project")
-st.title("ECG Noise Removal using FIR and IIR Digital Filters")
-st.write("Digital Signal Processing | Complex Engineering Problem")
 st.markdown("---")
 
 # ============================================================
@@ -74,6 +158,19 @@ st.pyplot(fig, width="stretch")
 # ============================================================
 st.markdown("---")
 st.subheader("3. Frequency Analysis (FFT)")
+
+fft_vals = np.fft.fft(ecg_clean)
+freqs = np.fft.fftfreq(len(fft_vals), 1/Fs)
+
+fig, ax = plt.subplots()
+ax.plot(freqs[:len(freqs)//2], np.abs(fft_vals[:len(freqs)//2]))
+ax.set_title("Frequency Spectrum of Clean ECG")
+ax.set_xlim(0, 150)
+ax.set_xlabel("Frequency (Hz)")
+ax.set_ylabel("Magnitude")
+ax.axis("on")
+ax.grid(True)
+st.pyplot(fig, width="stretch")
 
 fft_vals = np.fft.fft(ecg_noisy)
 freqs = np.fft.fftfreq(len(fft_vals), 1/Fs)
@@ -227,4 +324,16 @@ st.warning(f"""
 """)
 
 
+st.markdown(
+    """
+    <div class="retro-footer">
+        © 2022–2026 ECG Synthesizer & Noise Filtering<br>
+        Electrical Engineering Department,
+        University of Engineering and Technology (UET), Taxila<br>
+        Developed by Muhammad Abdul Rehman (22-EE-040)<br>
+        
+    </div>
+    """,
+    unsafe_allow_html=True
+)
 
