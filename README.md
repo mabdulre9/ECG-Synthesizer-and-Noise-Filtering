@@ -143,16 +143,19 @@ Measures signal distortion relative to the clean ECG.
 
 ---
 
-## How to Run the Project
+## Installation and Local Setup
+Follow the steps below to run the project locally or use it live on  https://image-processing-exploration-suite.streamlit.app/
 
-### 1. Install Dependencies
-
+### 1. Clone the Repository
 ```bash
-pip install streamlit numpy scipy matplotlib neurokit2
+git clone https://github.com/mabdulre9/ECG-Synthesizer-and-Noise-Filtering.git
+cd ECG-Synthesizer-and-Noise-Filtering
 ```
-
-### 2. Run the Application
-
+### 2. Install Dependencies
+```bash
+pip install numpy streamlit matplotlib neurokit2 scipy
+```
+### 3. Run the Streamlit App
 ```bash
 streamlit run app.py
 ```
