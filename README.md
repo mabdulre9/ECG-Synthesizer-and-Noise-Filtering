@@ -7,8 +7,6 @@
 **Department:** Electrical Engineering
 **University:** University of Engineering and Technology (UET), Taxila
 **Instructor:** Engr. Zainab Shahid
-**Developer:** Muhammad Abdul Rehman (22-EE-040)
-
 ---
 
 ## Project Overview
